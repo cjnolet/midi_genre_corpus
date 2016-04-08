@@ -5,8 +5,8 @@
 
 from music21 import *
 import os
-from pprint import *
 from multiprocessing import Process
+from multiprocessing import Pool
 import threading
 import sys
 
@@ -56,6 +56,8 @@ def extract(path, files):
 basedir = sys.argv[1]
 genres = ["country", "rock", "pop", "folk", "classical", "jazz", "rap", "world", "rhythm_and_blues"]
 
+pool = Pool(processes=25)
+processes = []
 for g in genres:
     final_mids = []
     mids = os.listdir(basedir + "/" + g + "/midi")
@@ -63,16 +65,12 @@ for g in genres:
         if(i.endswith("midi") or i.endswith("mid")):
            final_mids.append(i)
 
-    chunks = list(chunks(final_mids, int(sys.argv[2])))
+    theChunks = list(chunks(final_mids, int(sys.argv[2])))
 
+    for i in theChunks:
+        pool.apply_async(extract, [basedir + "/" + g, i])
 
-    processes = []
-    for i in chunks:
-        process = Process(target=extract, args=(basedir + "/" + g, i))
-        process.start()
-        processes.append(process)
-
-    # Wait for all threads to complete
-    for t in processes:
-        t.join()
+# Wait for all threads to complete
+pool.close()
+pool.join()
 

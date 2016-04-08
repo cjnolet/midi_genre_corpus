@@ -2,4 +2,3 @@ M, 1, MelodicIntervalHistogramFeature, "[0.39854780153287617, 0.0697862041145623
 M, 2, AverageMelodicIntervalFeature, "[2.7321500605082694]"
 M, 3, MostCommonMelodicIntervalFeature, "[0]"
 M, 4, DistanceBetweenMostCommonMelodicIntervalsFeature, "[3]"
-M, 5, MostCommonMelodicIntervalPrevalenceFeature, "[0.39854780153287617]"

@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[1]:
 
 from music21 import *
 from multiprocessing import Process
@@ -11,7 +11,7 @@ import sys
 import os
 
 
-# In[ ]:
+# In[2]:
 
 def extracted_features(file_path):
     ret = []
@@ -19,12 +19,16 @@ def extracted_features(file_path):
         with open(file_path) as f:
             content = f.readlines()
             if len(content) > 0:
-                ret = set(map(lambda it: tuple(it.split(", ")[0:2]), content))
+                try:
+                    ret = map(lambda it: it.split(",")[0:2], content)
+                    ret = map(lambda it: (it[0], it[1]), ret)
+                except:
+                    print("Error in resume.")
         f.close()
-    return ret
+    return set(ret)
 
 
-# In[ ]:
+# In[3]:
 
 def chunks(l, n):
     for i in xrange(0, len(l), n):
@@ -40,7 +44,7 @@ def extract(path, files):
         try:
             o = converter.parse(path + "/midi/" + str(i))
             features_path = str(path) + "/features/" + str(i) + ".csv"
-            
+
             # Allow the continuation of extraction if, for some reason, an error occurred
             already_extracted = extracted_features(features_path)
 
@@ -57,18 +61,18 @@ def extract(path, files):
                              try:
                                  vec = t5.extract().vector
                                  text_file = open(features_path, "a")
-                                 text_file.write(k + ", " + str(i) + ", " + str(n) + ", \"" + str(list(vec)) + "\"\n")
+                                 text_file.write(k + "," + str(i) + "," + str(n) + "," + str(list(vec)).replace(' ', '').replace('[', '').replace(']', '') + "\n")
                                  text_file.flush()
                                  text_file.close()
                              except:
                                 print("Error extracting " + str(n) + " from " + features_path + " continuing...")
         except: 
-            print("Failure encountered converting " + path + "/midi/" + str(i))
+            print("Failure encountered extracting features from " + path + "/midi/" + str(i))
 
 
 # In[ ]:
 
-basedir = sys.argv[1]
+basedir = '.'
 genres = ["country", "rock", "pop", "folk", "classical", "jazz", "rap", "world", "rhythm_and_blues"]
 
 pool = Pool(processes=25)
@@ -80,7 +84,7 @@ for g in genres:
         if(i.endswith("midi") or i.endswith("mid")):
            final_mids.append(i)
 
-    theChunks = list(chunks(final_mids, int(sys.argv[2])))
+    theChunks = list(chunks(final_mids, 1))
 
     for i in theChunks:
         pool.apply_async(extract, [basedir + "/" + g, i])

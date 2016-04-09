@@ -1,4 +1,5 @@
 #!/bin/bash
 
 
-python extract_features.py . 1
+python extract_features.py
+

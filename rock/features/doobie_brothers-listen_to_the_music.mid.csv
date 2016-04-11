@@ -44,3 +44,13 @@ R,21,StaccatoIncidenceFeature,0.3066073314225373
 R,22,AverageTimeBetweenAttacksFeature,0.07592212502241795
 R,23,VariabilityOfTimeBetweenAttacksFeature,0.05549966509626842
 R,24,AverageTimeBetweenAttacksForEachVoiceFeature,0.5159238643116268
+R,25,AverageVariabilityOfTimeBetweenAttacksForEachVoiceFeature,3.1920354708639898
+R,30,InitialTempoFeature,107.00000000000001
+R,31,InitialTimeSignatureFeature,4,4
+R,32,CompoundOrSimpleMeterFeature,0
+R,33,TripleMeterFeature,0
+R,34,QuintupleMeterFeature,0
+R,35,ChangesOfMeterFeature,0
+T,1,MaximumNumberOfIndependentVoicesFeature,9
+T,2,AverageNumberOfIndependentVoicesFeature,4.2834187238006525
+T,3,VariabilityOfNumberOfIndependentVoicesFeature,1.7293649615592839

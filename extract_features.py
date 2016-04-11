@@ -39,11 +39,11 @@ def chunks(l, n):
 
 def extract(path, files):
     print("Running thread for %s" % (str(files)))
-    for i in files: 
-        print("Opening coverter for %s/midi/%s" % (path, str(i)))
+    for f in files: 
+        print("Opening coverter for %s/midi/%s" % (path, str(f)))
         try:
-            o = converter.parse(path + "/midi/" + str(i))
-            features_path = str(path) + "/features/" + str(i) + ".csv"
+            o = converter.parse(path + "/midi/" + str(f))
+            features_path = str(path) + "/features/" + str(f) + ".csv"
 
             # Allow the continuation of extraction if, for some reason, an error occurred
             already_extracted = extracted_features(features_path)
@@ -67,15 +67,17 @@ def extract(path, files):
                              except:
                                 print("Error extracting " + str(n) + " from " + features_path + " continuing...")
         except: 
-            print("Failure encountered extracting features from " + path + "/midi/" + str(i))
+            print("Failure encountered extracting features from " + path + "/midi/" + str(f))
+
+	print("Finished processing " + path + "/midi/" + str(f))
 
 
 # In[ ]:
 
 basedir = '.'
-genres = ["country", "rock", "pop", "folk", "classical", "jazz", "rap", "world", "rhythm_and_blues"]
+genres = ["country", "rock", "pop"]
 
-pool = Pool(processes=25)
+pool = Pool(processes=10)
 processes = []
 for g in genres:
     final_mids = []
@@ -84,7 +86,7 @@ for g in genres:
         if(i.endswith("midi") or i.endswith("mid")):
            final_mids.append(i)
 
-    theChunks = list(chunks(final_mids, 1))
+    theChunks = list(chunks(final_mids, 5))
 
     for i in theChunks:
         pool.apply_async(extract, [basedir + "/" + g, i])

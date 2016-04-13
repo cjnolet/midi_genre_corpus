@@ -51,3 +51,6 @@ R,32,CompoundOrSimpleMeterFeature,0
 R,33,TripleMeterFeature,0
 R,34,QuintupleMeterFeature,0
 R,35,ChangesOfMeterFeature,0
+T,1,MaximumNumberOfIndependentVoicesFeature,9
+T,2,AverageNumberOfIndependentVoicesFeature,3.509527299377061
+T,3,VariabilityOfNumberOfIndependentVoicesFeature,1.7987824441829912

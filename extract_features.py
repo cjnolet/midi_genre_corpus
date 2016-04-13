@@ -75,7 +75,7 @@ def extract(path, files):
 # In[ ]:
 
 basedir = '.'
-genres = ["country", "rock", "pop"]
+genres = ["jazz", "rap", "rhythm_and_blues"]
 
 pool = Pool(processes=10)
 processes = []

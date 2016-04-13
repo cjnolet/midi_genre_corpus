@@ -53,3 +53,4 @@ R,34,QuintupleMeterFeature,0
 R,35,ChangesOfMeterFeature,0
 T,1,MaximumNumberOfIndependentVoicesFeature,10
 T,2,AverageNumberOfIndependentVoicesFeature,5.333826575910033
+T,3,VariabilityOfNumberOfIndependentVoicesFeature,1.986000397751175

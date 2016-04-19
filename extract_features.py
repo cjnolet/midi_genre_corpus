@@ -75,9 +75,9 @@ def extract(path, files):
 # In[ ]:
 
 basedir = '.'
-genres = ["jazz", "rap", "rhythm_and_blues"]
+genres = ["classical", "rock", "pop", "jazz", "folk", "rhythm_and_blues", "country", "rap"]
 
-pool = Pool(processes=10)
+pool = Pool(processes=25)
 processes = []
 for g in genres:
     final_mids = []
@@ -86,7 +86,7 @@ for g in genres:
         if(i.endswith("midi") or i.endswith("mid")):
            final_mids.append(i)
 
-    theChunks = list(chunks(final_mids, 5))
+    theChunks = list(chunks(final_mids, 2))
 
     for i in theChunks:
         pool.apply_async(extract, [basedir + "/" + g, i])
